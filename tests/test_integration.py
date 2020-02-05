@@ -11,7 +11,10 @@ from test_project.example import (
 )
 
 #: This is just our specific example.
-_EXCUDED_LINES = (10 - sys.version_info[1]) * 3
+_EXCUDED_LINES = (sys.version_info[1] - 6) * 3 + 6
+# 3.8 = 12
+# 3.7 = 9
+# 3.6 = 6
 
 
 def test_integration(cov, capsys):
