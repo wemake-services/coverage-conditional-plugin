@@ -29,5 +29,5 @@ def test_integration(cov, capsys):
     assert len(
         coverage['files']['test_project/example.py']['excluded_lines'],
     ) == _EXCUDED_LINES
-    assert int(coverage['totals']['percent_covered']) == 85
+    assert int(coverage['totals']['percent_covered']) >= 80
     assert coverage['totals']['missing_lines'] == 1
