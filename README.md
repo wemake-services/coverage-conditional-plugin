@@ -77,7 +77,8 @@ But, different lines will be included.
 With `django` installed it will include 
 both `try:` and `if django is not None:` conditions.
 
-When running without `django` installed it will include `except ImportError:`.
+When running without `django` installed,
+it will include `except ImportError:` line.
 
 
 ## Writting pragma rules
@@ -88,8 +89,9 @@ Format for pragma rules is:
 "pragma-condition": pragma-name
 ```
 
-Code inside `"pragma-condition"` is evaluted with `exec`.
+Code inside `"pragma-condition"` is evaluted with `eval`.
 Make sure that the input you pass there is trusted!
+`"pragma-condition"` must return `bool` value after evaluation.
 
 We also provide a bunch of helpers to make writing rules easier:
 
