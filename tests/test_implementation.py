@@ -1,0 +1,19 @@
+# -*- coding: utf-8 -*-
+
+from coverage_conditional_plugin import _is_installed, _package_version
+
+
+def test_is_installed():
+    """Ensures that ``_is_installed`` works correctly."""
+    assert _is_installed('coverage') is True  # regular dependency
+    assert _is_installed('pytest') is True  # dev dependency
+    assert _is_installed('missing') is False  # missing dependency
+
+
+def test_package_version():
+    """Ensures that ``_package_version`` is correct."""
+    coverage_version = _package_version('coverage')
+    pytest_version = _package_version('pytest')
+
+    assert coverage_version is not None and coverage_version < (1000, 0, 0)
+    assert pytest_version is not None and pytest_version > (5, 0)

@@ -1,8 +1,7 @@
 # coverage-conditional-plugin
 
 [![wemake.services](https://img.shields.io/badge/%20-wemake.services-green.svg?label=%20&logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAABGdBTUEAALGPC%2FxhBQAAAAFzUkdCAK7OHOkAAAAbUExURQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP%2F%2F%2F5TvxDIAAAAIdFJOUwAjRA8xXANAL%2Bv0SAAAADNJREFUGNNjYCAIOJjRBdBFWMkVQeGzcHAwksJnAPPZGOGAASzPzAEHEGVsLExQwE7YswCb7AFZSF3bbAAAAABJRU5ErkJggg%3D%3D)](https://wemake.services)
-[![Build Status](https://travis-ci.com/wemake.services/coverage-conditional-plugin.svg?branch=master)](https://travis-ci.com/wemake.services/coverage-conditional-plugin)
-[![Coverage](https://coveralls.io/repos/github/wemake.services/coverage-conditional-plugin/badge.svg?branch=master)](https://coveralls.io/github/wemake.services/coverage-conditional-plugin?branch=master)
+[![Build Status](https://travis-ci.com/wemake-services/coverage-conditional-plugin.svg?branch=master)](https://travis-ci.com/wemake-services/coverage-conditional-plugin)
 [![Python Version](https://img.shields.io/pypi/pyversions/coverage-conditional-plugin.svg)](https://pypi.org/project/coverage-conditional-plugin/)
 [![wemake-python-styleguide](https://img.shields.io/badge/style-wemake-000000.svg)](https://github.com/wemake-services/wemake-python-styleguide)
 
@@ -96,6 +95,7 @@ We also provide a bunch of helpers to make writing rules easier:
 
 - `sys_version_info` is the same as [`sys.version_info`](https://docs.python.org/3/library/sys.html#sys.version_info)
 - `os_name` is the same as [`os.name`](https://docs.python.org/3/library/os.html#os.name)
+- `os_environ` is the same as [`os.environ`](https://docs.python.org/3/library/os.html#os.environ)
 - `platform_system` is the same as [`platform.system()`](https://docs.python.org/3/library/platform.html#platform.system)
 - `platform_release` is the same as [`platform.release()`](https://docs.python.org/3/library/platform.html#platform.release)
 - `is_installed` is our custom function that tries to import the passed string, returns `bool` value

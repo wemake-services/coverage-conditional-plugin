@@ -1,21 +1,20 @@
 # -*- coding: utf-8 -*-
 
-import sys
 import os
 import platform
+import sys
 import traceback
+from typing import ClassVar, Optional, Tuple
+
 import pkg_resources
-from typing import ClassVar
-
-from packaging import version
-
 from coverage import CoveragePlugin
 from coverage.config import CoverageConfig
+from packaging import version
 
 
 class _PythonVersionExclusionPlugin(CoveragePlugin):
     _rules_opt_name: ClassVar[str] = 'coverage_conditional_plugin:rules'
-    _ignore_opt_name:ClassVar[str] = 'report:exclude_lines'
+    _ignore_opt_name: ClassVar[str] = 'report:exclude_lines'
 
     def configure(self, config: CoverageConfig) -> None:
         """
@@ -66,18 +65,21 @@ class _PythonVersionExclusionPlugin(CoveragePlugin):
 
         """
         try:
-            return exec(code, {
+            return eval(code, {  # noqa: WPS421, S307
                 # Feel free to send PRs that extend this dict:
                 'sys_version_info': sys.version_info,
                 'os_name': os.name,
+                'os_environ': os.environ,
                 'platform_system': platform.system(),
                 'platform_release': platform.release(),
                 'is_installed': _is_installed,
                 'package_version': _package_version,
             })
-        except Exception as ex:
-            print('Exception during conditional coverage evaluation:')
-            print(traceback.format_exc())
+        except Exception:
+            print(  # noqa: T001
+                'Exception during conditional coverage evaluation:',
+                traceback.format_exc(),
+            )
             return False
 
     def _ignore_marker(self, config: CoverageConfig, marker: str) -> None:
@@ -90,23 +92,27 @@ class _PythonVersionExclusionPlugin(CoveragePlugin):
 def _is_installed(package: str) -> bool:
     """Helper function to detect if some package is installed."""
     try:
-        __import__(package)
+        __import__(package)  # noqa: WPS421
     except ImportError:
         return False
     else:
         return True
 
 
-def _package_version(package: str) -> version.Version:
+def _package_version(
+    package: str,
+) -> Optional[Tuple[int, ...]]:
     """
     Helper function that fetches distribution version.
 
     Can throw multiple exceptions.
     Be careful, use ``is_installed`` before using this one.
+
+    Returns parsed varsion to be easily worked with.
     """
     return version.parse(
         pkg_resources.get_distribution(package).version,
-    )
+    ).release
 
 
 def coverage_init(reg, options) -> None:
