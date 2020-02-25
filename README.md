@@ -18,6 +18,8 @@ This project allows to use configurable pragmas
 that include code to the coverage if some condition evaluates to true, 
 and fallback to ignoring this code when condition is false.
 
+Read [the announcing post](https://sobolevn.me/2020/02/conditional-coverage).
+
 
 ## Installation
 
