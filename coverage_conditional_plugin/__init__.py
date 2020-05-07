@@ -3,7 +3,7 @@
 import os
 import sys
 import traceback
-from typing import ClassVar, Optional, Tuple
+from typing import ClassVar, Dict, Optional, Tuple
 
 import pkg_resources
 from coverage import CoveragePlugin
@@ -64,7 +64,8 @@ class _PythonVersionExclusionPlugin(CoveragePlugin):
         this code will be included to the coverage on 3.8+ releases.
 
         """
-        env_info = default_environment()
+        env_info: Dict[str, object] = {}
+        env_info.update(default_environment())
         # Feel free to send PRs that extend this dict:
         env_info.update({
             'sys_version_info': sys.version_info,
