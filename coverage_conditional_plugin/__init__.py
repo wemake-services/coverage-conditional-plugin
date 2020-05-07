@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import os
-import platform
 import sys
 import traceback
 from typing import ClassVar, Optional, Tuple
@@ -10,6 +9,7 @@ import pkg_resources
 from coverage import CoveragePlugin
 from coverage.config import CoverageConfig
 from packaging import version
+from packaging.markers import default_environment
 
 
 class _PythonVersionExclusionPlugin(CoveragePlugin):
@@ -64,22 +64,19 @@ class _PythonVersionExclusionPlugin(CoveragePlugin):
         this code will be included to the coverage on 3.8+ releases.
 
         """
+        env_info = default_environment()
+        # Feel free to send PRs that extend this dict:
+        env_info.update({
+            'sys_version_info': sys.version_info,
+            'os_environ': os.environ,
+            'is_installed': _is_installed,
+            'package_version': _package_version,
+        })
         try:
-            return eval(code, {  # noqa: WPS421, S307
-                # Feel free to send PRs that extend this dict:
-                'sys_version_info': sys.version_info,
-                'os_name': os.name,
-                'os_environ': os.environ,
-                'platform_system': platform.system(),
-                'platform_release': platform.release(),
-                'is_installed': _is_installed,
-                'package_version': _package_version,
-            })
+            return eval(code, env_info)  # noqa: WPS421, S307
         except Exception:
-            print(  # noqa: T001
-                'Exception during conditional coverage evaluation:',
-                traceback.format_exc(),
-            )
+            msg = 'Exception during conditional coverage evaluation:'
+            print(msg, traceback.format_exc())  # noqa: T001
             return False
 
     def _ignore_marker(self, config: CoverageConfig, marker: str) -> None:
