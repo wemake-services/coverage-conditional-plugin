@@ -34,7 +34,7 @@ coverage = "^5.0"
 
 
 [tool.poetry.dev-dependencies]
-mypy = "^0.761"
+mypy = "^0.770"
 
 wemake-python-styleguide = "^0.13.4"
 flake8-pytest = "^1.3"
