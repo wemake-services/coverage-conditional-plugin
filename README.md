@@ -7,7 +7,7 @@
 
 Conditional coverage based on any rules you define!
 
-Some project have different parts that relies on different environments:
+Some projects have different parts that relies on different environments:
 
 - Python version, some code is only executed on specific versions and ignored on others
 - OS version, some code might be Windows, Mac, or Linux only
@@ -83,7 +83,7 @@ When running without `django` installed,
 it will include `except ImportError:` line.
 
 
-## Writting pragma rules
+## Writing pragma rules
 
 Format for pragma rules is:
 
@@ -104,6 +104,14 @@ sections for available values. Also, we provide a bunch of additional markers:
 - `os_environ` is the same as [`os.environ`](https://docs.python.org/3/library/os.html#os.environ)
 - `is_installed` is our custom function that tries to import the passed string, returns `bool` value
 - `package_version` is our custom function that tries to get package version from `pkg_resources` and returns its [parsed version](https://packaging.pypa.io/en/latest/version/#packaging.version.parse)
+
+Use `get_env_info` to get values for the current environment:
+
+```python
+from coverage_conditional_plugin import get_env_info
+
+get_env_info()
+```
 
 
 ## License

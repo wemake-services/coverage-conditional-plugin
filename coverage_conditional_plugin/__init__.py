@@ -12,6 +12,19 @@ from packaging import version
 from packaging.markers import default_environment
 
 
+def get_env_info() -> Dict[str, object]:
+    env_info: Dict[str, object] = {}
+    env_info.update(default_environment())
+    # Feel free to send PRs that extend this dict:
+    env_info.update({
+        'sys_version_info': sys.version_info,
+        'os_environ': os.environ,
+        'is_installed': _is_installed,
+        'package_version': _package_version,
+    })
+    return env_info
+
+
 class _PythonVersionExclusionPlugin(CoveragePlugin):
     _rules_opt_name: ClassVar[str] = 'coverage_conditional_plugin:rules'
     _ignore_opt_name: ClassVar[str] = 'report:exclude_lines'
@@ -64,15 +77,7 @@ class _PythonVersionExclusionPlugin(CoveragePlugin):
         this code will be included to the coverage on 3.8+ releases.
 
         """
-        env_info: Dict[str, object] = {}
-        env_info.update(default_environment())
-        # Feel free to send PRs that extend this dict:
-        env_info.update({
-            'sys_version_info': sys.version_info,
-            'os_environ': os.environ,
-            'is_installed': _is_installed,
-            'package_version': _package_version,
-        })
+        env_info = get_env_info()
         try:
             return eval(code, env_info)  # noqa: WPS421, S307
         except Exception:
