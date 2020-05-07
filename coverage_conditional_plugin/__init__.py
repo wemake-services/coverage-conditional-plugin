@@ -3,6 +3,7 @@
 import os
 import sys
 import traceback
+from importlib import import_module
 from typing import ClassVar, Dict, Optional, Tuple
 
 import pkg_resources
@@ -95,11 +96,10 @@ class _PythonVersionExclusionPlugin(CoveragePlugin):
 def _is_installed(package: str) -> bool:
     """Helper function to detect if some package is installed."""
     try:
-        __import__(package)  # noqa: WPS421
+        import_module(package)
     except ImportError:
         return False
-    else:
-        return True
+    return True
 
 
 def _package_version(
