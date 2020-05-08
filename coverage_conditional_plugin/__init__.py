@@ -14,6 +14,7 @@ from packaging.markers import default_environment
 
 
 def get_env_info() -> Dict[str, object]:
+    """Public helper to get the same env we pass to the plugin."""
     env_info: Dict[str, object] = {}
     env_info.update(default_environment())
     # Feel free to send PRs that extend this dict:
@@ -26,7 +27,7 @@ def get_env_info() -> Dict[str, object]:
     return env_info
 
 
-class _PythonVersionExclusionPlugin(CoveragePlugin):
+class _ConditionalCovPlugin(CoveragePlugin):
     _rules_opt_name: ClassVar[str] = 'coverage_conditional_plugin:rules'
     _ignore_opt_name: ClassVar[str] = 'report:exclude_lines'
 
@@ -83,7 +84,7 @@ class _PythonVersionExclusionPlugin(CoveragePlugin):
             return eval(code, env_info)  # noqa: WPS421, S307
         except Exception:
             msg = 'Exception during conditional coverage evaluation:'
-            print(msg, traceback.format_exc())  # noqa: T001
+            print(msg, traceback.format_exc())  # noqa: WPS421
             return False
 
     def _ignore_marker(self, config: CoverageConfig, marker: str) -> None:
@@ -134,4 +135,4 @@ def coverage_init(reg, options) -> None:
         https://coverage.readthedocs.io/en/latest/plugins.html
 
     """
-    reg.add_configurer(_PythonVersionExclusionPlugin())
+    reg.add_configurer(_ConditionalCovPlugin())

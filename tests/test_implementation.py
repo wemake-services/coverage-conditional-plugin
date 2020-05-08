@@ -15,5 +15,7 @@ def test_package_version():
     coverage_version = _package_version('coverage')
     pytest_version = _package_version('pytest')
 
-    assert coverage_version is not None and coverage_version < (1000, 0, 0)
-    assert pytest_version is not None and pytest_version > (5, 0)
+    assert coverage_version is not None
+    assert coverage_version < (1000, 0, 0)
+    assert pytest_version is not None
+    assert pytest_version > (5, 0)
