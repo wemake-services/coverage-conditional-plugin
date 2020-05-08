@@ -8,15 +8,15 @@
 
 Conditional coverage based on any rules you define!
 
-Some project have different parts that relies on different environments:
+Some projects have different parts that relies on different environments:
 
 - Python version, some code is only executed on specific versions and ignored on others
 - OS version, some code might be Windows, Mac, or Linux only
 - External packages, some code is only executed when some 3rd party package is installed
 
 Current best practice is to use `# pragma: no cover` for this places in our project.
-This project allows to use configurable pragmas 
-that include code to the coverage if some condition evaluates to true, 
+This project allows to use configurable pragmas
+that include code to the coverage if some condition evaluates to true,
 and fallback to ignoring this code when condition is false.
 
 Read [the announcing post](https://sobolevn.me/2020/02/conditional-coverage).
@@ -28,7 +28,7 @@ Read [the announcing post](https://sobolevn.me/2020/02/conditional-coverage).
 pip install coverage-conditional-plugin
 ```
 
-Then you will need to add to your `setup.cfg` or `.coveragerc` file 
+Then you will need to add to your `setup.cfg` or `.coveragerc` file
 some extra configuration:
 
 ```ini
@@ -73,20 +73,20 @@ rules =
 
 ```
 
-When running tests with and without `django` installed 
+When running tests with and without `django` installed
 you will have `100%` coverage in both cases.
 
-But, different lines will be included. 
-With `django` installed it will include 
+But, different lines will be included.
+With `django` installed it will include
 both `try:` and `if django is not None:` conditions.
 
 When running without `django` installed,
 it will include `except ImportError:` line.
 
 
-## Writting pragma rules
+## Writing pragma rules
 
-Format for pragma rules is: 
+Format for pragma rules is:
 
 ```
 "pragma-condition": pragma-name
@@ -96,15 +96,23 @@ Code inside `"pragma-condition"` is evaluted with `eval`.
 Make sure that the input you pass there is trusted!
 `"pragma-condition"` must return `bool` value after evaluation.
 
-We also provide a bunch of helpers to make writing rules easier:
+We support all environment markers specified in [PEP-496](https://www.python.org/dev/peps/pep-0496/).
+See [Strings](https://www.python.org/dev/peps/pep-0496/#strings)
+and [Version Numbers](https://www.python.org/dev/peps/pep-0496/#version-numbers)
+sections for available values. Also, we provide a bunch of additional markers:
 
 - `sys_version_info` is the same as [`sys.version_info`](https://docs.python.org/3/library/sys.html#sys.version_info)
-- `os_name` is the same as [`os.name`](https://docs.python.org/3/library/os.html#os.name)
 - `os_environ` is the same as [`os.environ`](https://docs.python.org/3/library/os.html#os.environ)
-- `platform_system` is the same as [`platform.system()`](https://docs.python.org/3/library/platform.html#platform.system)
-- `platform_release` is the same as [`platform.release()`](https://docs.python.org/3/library/platform.html#platform.release)
 - `is_installed` is our custom function that tries to import the passed string, returns `bool` value
 - `package_version` is our custom function that tries to get package version from `pkg_resources` and returns its [parsed version](https://packaging.pypa.io/en/latest/version/#packaging.version.parse)
+
+Use `get_env_info` to get values for the current environment:
+
+```python
+from coverage_conditional_plugin import get_env_info
+
+get_env_info()
+```
 
 
 ## License

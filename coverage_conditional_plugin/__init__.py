@@ -1,15 +1,30 @@
 # -*- coding: utf-8 -*-
 
 import os
-import platform
 import sys
 import traceback
-from typing import ClassVar, Optional, Tuple
+from importlib import import_module
+from typing import ClassVar, Dict, Optional, Tuple
 
 import pkg_resources
 from coverage import CoveragePlugin
 from coverage.config import CoverageConfig
 from packaging import version
+from packaging.markers import default_environment
+
+
+def get_env_info() -> Dict[str, object]:
+    """Public helper to get the same env we pass to the plugin."""
+    env_info: Dict[str, object] = {}
+    env_info.update(default_environment())
+    # Feel free to send PRs that extend this dict:
+    env_info.update({
+        'sys_version_info': sys.version_info,
+        'os_environ': os.environ,
+        'is_installed': _is_installed,
+        'package_version': _package_version,
+    })
+    return env_info
 
 
 class _ConditionalCovPlugin(CoveragePlugin):
@@ -64,22 +79,12 @@ class _ConditionalCovPlugin(CoveragePlugin):
         this code will be included to the coverage on 3.8+ releases.
 
         """
+        env_info = get_env_info()
         try:
-            return eval(code, {  # noqa: WPS421, S307
-                # Feel free to send PRs that extend this dict:
-                'sys_version_info': sys.version_info,
-                'os_name': os.name,
-                'os_environ': os.environ,
-                'platform_system': platform.system(),
-                'platform_release': platform.release(),
-                'is_installed': _is_installed,
-                'package_version': _package_version,
-            })
+            return eval(code, env_info)  # noqa: WPS421, S307
         except Exception:
-            print(  # noqa: WPS421
-                'Exception during conditional coverage evaluation:',
-                traceback.format_exc(),
-            )
+            msg = 'Exception during conditional coverage evaluation:'
+            print(msg, traceback.format_exc())  # noqa: WPS421
             return False
 
     def _ignore_marker(self, config: CoverageConfig, marker: str) -> None:
@@ -92,11 +97,10 @@ class _ConditionalCovPlugin(CoveragePlugin):
 def _is_installed(package: str) -> bool:
     """Helper function to detect if some package is installed."""
     try:
-        __import__(package)  # noqa: WPS421
+        import_module(package)
     except ImportError:
         return False
-    else:
-        return True
+    return True
 
 
 def _package_version(
