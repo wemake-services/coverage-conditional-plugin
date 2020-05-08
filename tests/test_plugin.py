@@ -2,7 +2,7 @@
 
 import pytest
 
-from coverage_conditional_plugin import _PythonVersionExclusionPlugin
+from coverage_conditional_plugin import _ConditionalCovPlugin
 
 
 @pytest.mark.parametrize('code', [
@@ -19,5 +19,5 @@ from coverage_conditional_plugin import _PythonVersionExclusionPlugin
 ])
 def test_plugin_should_be_applied(code):
     """Ensures code is evaluated correctly."""
-    plugin = _PythonVersionExclusionPlugin()
+    plugin = _ConditionalCovPlugin()
     assert plugin._should_be_applied(code) is True  # noqa: WPS437

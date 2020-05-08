@@ -12,7 +12,7 @@ from coverage.config import CoverageConfig
 from packaging import version
 
 
-class _PythonVersionExclusionPlugin(CoveragePlugin):
+class _ConditionalCovPlugin(CoveragePlugin):
     _rules_opt_name: ClassVar[str] = 'coverage_conditional_plugin:rules'
     _ignore_opt_name: ClassVar[str] = 'report:exclude_lines'
 
@@ -76,7 +76,7 @@ class _PythonVersionExclusionPlugin(CoveragePlugin):
                 'package_version': _package_version,
             })
         except Exception:
-            print(  # noqa: T001
+            print(  # noqa: WPS421
                 'Exception during conditional coverage evaluation:',
                 traceback.format_exc(),
             )
@@ -131,4 +131,4 @@ def coverage_init(reg, options) -> None:
         https://coverage.readthedocs.io/en/latest/plugins.html
 
     """
-    reg.add_configurer(_PythonVersionExclusionPlugin())
+    reg.add_configurer(_ConditionalCovPlugin())
