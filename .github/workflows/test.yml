@@ -33,14 +33,8 @@ jobs:
     - name: Run checks
       run: |
         source "$HOME/.poetry/env"
-        poetry run flake8 .
-        poetry run mypy dotenv_linter
-        poetry run pytest
-        poetry run doc8 -q docs
-        poetry run safety check --bare --full-report
-        poetry check
-        poetry run pip check
-    - name: Upload coverage to Codecov  
+        make test
+    - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
       with:
         file: ./coverage.xml
