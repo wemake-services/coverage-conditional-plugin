@@ -45,6 +45,19 @@ rules =
 
 ```
 
+Or to your `pyproject.toml`:
+```toml
+[tool.coverage.run]
+# Here we specify plugins for coverage to be used:
+plugins = ["coverage_conditional_plugin"]
+
+[tool.coverage.coverage_conditional_plugin.rules]
+# Here we specify our pragma rules:
+py-gte-38 = "sys_version_info >= (3, 8)"
+has-mypy = "is_installed('mypy')"
+```
+
+
 Adapt rules to suit your needs!
 
 
