@@ -36,19 +36,21 @@ class _ConditionalCovPlugin(CoveragePlugin):
         Part of the ``coverage`` public API.
         Called right after ``coverage_init`` function.
         """
-        try: # ini format
+        try:  # ini format
             rules = filter(
                 bool,
                 config.get_option(self._rules_opt_name).splitlines(),
             )
 
-        except AttributeError: # toml format
-            rules = (r for r in config.get_option(self._rules_opt_name).items())
+        except AttributeError:  # toml format
+            rules = (rule for rule in config.get_option(self._rules_opt_name).items())
 
         for rule in rules:
             self._process_rule(config, rule)
 
-    def _process_rule(self, config: CoverageConfig, rule: Union[str, Tuple[str, str]]) -> None:
+    def _process_rule(
+        self, config: CoverageConfig, rule: Union[str, Tuple[str, str]]
+    ) -> None:
         if isinstance(rule, str):
             code, marker = [part.strip() for part in rule.rsplit(':', 1)]
             code = code[1:-1]  # removes quotes
