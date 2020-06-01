@@ -49,4 +49,7 @@ def test_config_file_parsing(configfile):
     cov.start()
     cov.stop()
 
-    assert 'py-gte-3{}'.format(sys.version_info[1]) in cov.config.exclude_list
+    assert (
+        'py-gte-3{minor_ver}'.format(minor_ver=sys.version_info[1])
+        in cov.config.exclude_list
+    )
