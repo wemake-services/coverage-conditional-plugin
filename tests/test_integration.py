@@ -37,10 +37,10 @@ def test_integration(cov, capsys):
     assert coverage['totals']['missing_lines'] == 1
 
 
-@pytest.mark.parametrize("configfile", [".coveragerc", "pyproject.toml"])
+@pytest.mark.parametrize('configfile', ['.coveragerc', 'pyproject.toml'])
 def test_config_file_parsing(configfile):
     """Ensures that coverage is executed correctly."""
-    config_file_path = Path(__file__).parents[1]/'test_project'/configfile
+    config_file_path = Path(__file__).parents[1] / 'test_project' / configfile
 
     cov = Coverage(config_file=str(config_file_path))
     assert cov.config.config_file == str(config_file_path)
@@ -49,4 +49,4 @@ def test_config_file_parsing(configfile):
     cov.start()
     cov.stop()
 
-    assert f"py-gte-3{sys.version_info[1]}" in cov.config.exclude_list
+    assert 'py-gte-3{}'.format(sys.version_info[1]) in cov.config.exclude_list
