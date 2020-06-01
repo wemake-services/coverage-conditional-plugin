@@ -2,6 +2,10 @@
 
 import json
 import sys
+from pathlib import Path
+
+import pytest
+from coverage import Coverage
 
 from test_project.example import (
     always,
@@ -31,3 +35,21 @@ def test_integration(cov, capsys):
     ) == _EXCUDED_LINES
     assert int(coverage['totals']['percent_covered']) >= 80
     assert coverage['totals']['missing_lines'] == 1
+
+
+@pytest.mark.parametrize('configfile', ['.coveragerc', 'pyproject.toml'])
+def test_config_file_parsing(configfile):
+    """Ensures that coverage is executed correctly."""
+    config_file_path = Path(__file__).parents[1] / 'test_project' / configfile
+
+    cov = Coverage(config_file=str(config_file_path))
+    assert cov.config.config_file == str(config_file_path)
+    assert cov.config.plugins == ['coverage_conditional_plugin']
+
+    cov.start()
+    cov.stop()
+
+    assert (
+        'py-gte-3{minor_ver}'.format(minor_ver=sys.version_info[1])
+        in cov.config.exclude_list
+    )
