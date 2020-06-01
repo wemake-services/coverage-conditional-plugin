@@ -64,7 +64,7 @@ class _ConditionalCovPlugin(CoveragePlugin):
 
     def _should_be_applied(self, code: str) -> bool:
         """
-        Determens whether some specific marker should be applied or not.
+        Determines whether some specific marker should be applied or not.
 
         Uses ``exec`` on the code you pass with the marker.
         Be sure, that this code is safe.
