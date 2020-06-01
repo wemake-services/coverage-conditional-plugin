@@ -43,13 +43,16 @@ class _ConditionalCovPlugin(CoveragePlugin):
             )
 
         except AttributeError:  # toml format
-            rules = (rule for rule in config.get_option(self._rules_opt_name).items())
+            rules = (
+                rule for rule in
+                config.get_option(self._rules_opt_name).items()
+            )
 
         for rule in rules:
             self._process_rule(config, rule)
 
     def _process_rule(
-        self, config: CoverageConfig, rule: Union[str, Tuple[str, str]]
+        self, config: CoverageConfig, rule: Union[str, Tuple[str, str]],
     ) -> None:
         if isinstance(rule, str):
             code, marker = [part.strip() for part in rule.rsplit(':', 1)]
