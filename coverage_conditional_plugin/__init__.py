@@ -2,7 +2,7 @@ import os
 import sys
 import traceback
 from importlib import import_module
-from typing import ClassVar, Dict, Optional, Tuple
+from typing import ClassVar, Dict, Optional, Tuple, Union
 
 import pkg_resources
 from coverage import CoveragePlugin
