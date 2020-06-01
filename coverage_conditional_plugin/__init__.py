@@ -36,16 +36,28 @@ class _ConditionalCovPlugin(CoveragePlugin):
         Part of the ``coverage`` public API.
         Called right after ``coverage_init`` function.
         """
-        rules = filter(
-            bool,
-            config.get_option(self._rules_opt_name).splitlines(),
-        )
+        try: # ini format
+            rules = filter(
+                bool,
+                config.get_option(self._rules_opt_name).splitlines(),
+            )
+
+        except AttributeError: # toml format
+            rules = (r for r in config.get_option(self._rules_opt_name).items())
+
         for rule in rules:
             self._process_rule(config, rule)
 
-    def _process_rule(self, config: CoverageConfig, rule: str) -> None:
-        code, marker = [part.strip() for part in rule.rsplit(':', 1)]
-        if self._should_be_applied(code[1:-1]):  # removes quotes
+    def _process_rule(self, config: CoverageConfig, rule: Union[str, Tuple[str, str]]) -> None:
+        if isinstance(rule, str):
+            code, marker = [part.strip() for part in rule.rsplit(':', 1)]
+            code = code[1:-1]  # removes quotes
+        elif isinstance(rule, tuple):
+            marker = rule[0]
+            code = rule[1]
+        else:
+            raise ValueError("Invalid type for 'rule'.")
+        if self._should_be_applied(code):
             self._ignore_marker(config, marker)
 
     def _should_be_applied(self, code: str) -> bool:
