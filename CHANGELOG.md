@@ -3,6 +3,13 @@
 We follow [Semantic Versions](https://semver.org/).
 
 
+## Version 0.3.0
+
+### Features
+
+- Now also works with configs specified in `pyproject.toml`
+
+
 ## Version 0.2.0
 
 ### Features
