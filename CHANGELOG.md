@@ -3,6 +3,13 @@
 We follow [Semantic Versions](https://semver.org/).
 
 
+## Version 0.3.1
+
+### Bugfixes
+
+- Adds `packaging` to the deps
+
+
 ## Version 0.3.0
 
 ### Features
