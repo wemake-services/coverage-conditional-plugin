@@ -3,6 +3,13 @@
 We follow [Semantic Versions](https://semver.org/).
 
 
+## Version 0.4.0
+
+### Features
+
+- `python3.9` support
+
+
 ## Version 0.3.1
 
 ### Bugfixes
