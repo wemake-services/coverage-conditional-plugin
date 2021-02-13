@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import pytest
 
 from coverage_conditional_plugin import _ConditionalCovPlugin

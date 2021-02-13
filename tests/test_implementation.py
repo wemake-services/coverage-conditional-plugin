@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from coverage_conditional_plugin import _is_installed, _package_version
 
 

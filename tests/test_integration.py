@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import json
 import sys
 from pathlib import Path
@@ -12,6 +10,7 @@ from test_project.example import (
     if_gte_python36,
     if_gte_python37,
     if_gte_python38,
+    if_gte_python39,
 )
 
 #: This is just our specific example.
@@ -23,7 +22,8 @@ _EXCUDED_LINES = (sys.version_info[1] - 6) * 3 + 6
 
 def test_integration(cov, capsys):
     """Ensures that coverage is executed correctly."""
-    assert if_gte_python36() != if_gte_python37() != if_gte_python38()
+    assert if_gte_python36() != if_gte_python37()
+    assert if_gte_python38() != if_gte_python39()
     assert always() == 'always'
 
     cov.json_report(outfile='-')
