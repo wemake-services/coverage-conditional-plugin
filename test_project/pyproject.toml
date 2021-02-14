@@ -5,3 +5,4 @@ plugins = ["coverage_conditional_plugin"]
 py-gte-36 = "sys_version_info >= (3, 6)"
 py-gte-37 = "sys_version_info >= (3, 7)"
 py-gte-38 = "sys_version_info >= (3, 8)"
+py-gte-39 = "sys_version_info >= (3, 9)"
