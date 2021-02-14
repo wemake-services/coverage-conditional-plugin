@@ -15,6 +15,7 @@ from test_project.example import (
 
 #: This is just our specific example.
 _EXCUDED_LINES = (sys.version_info[1] - 6) * 3 + 6
+# 3.9 = 15
 # 3.8 = 12
 # 3.7 = 9
 # 3.6 = 6
@@ -22,9 +23,12 @@ _EXCUDED_LINES = (sys.version_info[1] - 6) * 3 + 6
 
 def test_integration(cov, capsys):
     """Ensures that coverage is executed correctly."""
-    assert if_gte_python36() != if_gte_python37()
-    assert if_gte_python38() != if_gte_python39()
-    assert always() == 'always'
+    # We call all functions without any actual version checks.
+    if_gte_python36()
+    if_gte_python37()
+    if_gte_python38()
+    if_gte_python39()
+    always()
 
     cov.json_report(outfile='-')
     captured = capsys.readouterr()
