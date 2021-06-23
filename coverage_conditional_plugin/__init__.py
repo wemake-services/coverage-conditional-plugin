@@ -2,7 +2,7 @@ import os
 import sys
 import traceback
 from importlib import import_module
-from typing import ClassVar, Dict, Optional, Tuple, Union
+from typing import ClassVar, Dict, Iterable, Optional, Tuple, Union
 
 import pkg_resources
 from coverage import CoveragePlugin
@@ -36,15 +36,17 @@ class _ConditionalCovPlugin(CoveragePlugin):
         Part of the ``coverage`` public API.
         Called right after ``coverage_init`` function.
         """
+        rules: Iterable[str]
+
         try:  # ini format
             rules = filter(
                 bool,
                 config.get_option(self._rules_opt_name).splitlines(),
             )
         except AttributeError:  # toml format
-            rules = (  # type: ignore
-                rule for rule in
-                config.get_option(self._rules_opt_name).items()
+            rules = (
+                rule
+                for rule in config.get_option(self._rules_opt_name).items()
             )
 
         for rule in rules:
