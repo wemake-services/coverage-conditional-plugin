@@ -42,7 +42,7 @@ class _ConditionalCovPlugin(CoveragePlugin):
                 config.get_option(self._rules_opt_name).splitlines(),
             )
         except AttributeError:  # toml format
-            rules = (
+            rules = (  # type: ignore
                 rule for rule in
                 config.get_option(self._rules_opt_name).items()
             )
