@@ -44,10 +44,7 @@ class _ConditionalCovPlugin(CoveragePlugin):
                 config.get_option(self._rules_opt_name).splitlines(),
             )
         except AttributeError:  # toml format
-            rules = (
-                rule
-                for rule in config.get_option(self._rules_opt_name).items()
-            )
+            rules = config.get_option(self._rules_opt_name).items()
 
         for rule in rules:
             self._process_rule(config, rule)
