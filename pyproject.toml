@@ -32,7 +32,7 @@ classifiers = [
 python = "^3.6"
 
 coverage = "^5.0"
-packaging = "^20.4"
+packaging = ">=20.4,<22.0"
 
 
 [tool.poetry.dev-dependencies]
