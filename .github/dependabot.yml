@@ -6,10 +6,9 @@ updates:
     interval: daily
     time: "02:00"
   open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: nitpick
-    versions:
-    - 0.25.0
-  - dependency-name: wemake-python-styleguide
-    versions:
-    - 0.15.0
+- package-ecosystem: github-actions
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "02:00"
+  open-pull-requests-limit: 10
