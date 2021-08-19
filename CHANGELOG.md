@@ -9,6 +9,10 @@ We follow [Semantic Versions](https://semver.org/).
 
 - `python3.9` support
 
+### Bugfixes
+
+- Fixes that `packaging` restriction was too tight
+
 
 ## Version 0.3.1
 

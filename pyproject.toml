@@ -9,7 +9,7 @@ style = "https://raw.githubusercontent.com/wemake-services/wemake-python-stylegu
 
 [tool.poetry]
 name = "coverage-conditional-plugin"
-version = "0.3.1"
+version = "0.4.0"
 description = "Conditional coverage based on any rules you define!"
 license = "MIT"
 
@@ -32,7 +32,7 @@ classifiers = [
 python = "^3.6"
 
 coverage = "^5.0"
-packaging = ">=20.4,<22.0"
+packaging = ">=20.4"
 
 
 [tool.poetry.dev-dependencies]
