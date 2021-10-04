@@ -31,7 +31,7 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.6"
 
-coverage = "^5.0"
+coverage = ">=5,<7"
 packaging = ">=20.4"
 
 
