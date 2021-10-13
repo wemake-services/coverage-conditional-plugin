@@ -986,7 +986,7 @@ python-versions = "*"
 
 [[package]]
 name = "types-setuptools"
-version = "57.4.0"
+version = "57.4.1"
 description = "Typing stubs for setuptools"
 category = "dev"
 optional = false
@@ -1581,8 +1581,8 @@ typed-ast = [
     {file = "typed_ast-1.4.3.tar.gz", hash = "sha256:fb1bbeac803adea29cedd70781399c99138358c26d05fcbd23c13016b7f5ec65"},
 ]
 types-setuptools = [
-    {file = "types-setuptools-57.4.0.tar.gz", hash = "sha256:5034f81b237429c1dc0ad84d3e9015e74730400c4db2b4db40daba216d39289b"},
-    {file = "types_setuptools-57.4.0-py3-none-any.whl", hash = "sha256:986630532705e8c77740b6d3cd86aaafd1e0ba6b04119c73c39dc4a67ceae579"},
+    {file = "types-setuptools-57.4.1.tar.gz", hash = "sha256:ae7bb9a024e69d41256be44042c2727f83ea7919d8775a9087febca8efb11ea5"},
+    {file = "types_setuptools-57.4.1-py3-none-any.whl", hash = "sha256:68c06bc8bb24084240de3625e2333235a16babffdcf53a0a1c8ec16df8571358"},
 ]
 typing-extensions = [
     {file = "typing_extensions-3.10.0.0-py2-none-any.whl", hash = "sha256:0ac0f89795dd19de6b97debb0c6af1c70987fd80a2d62d1958f7e56fcc31b497"},
