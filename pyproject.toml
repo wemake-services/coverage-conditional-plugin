@@ -39,7 +39,7 @@ packaging = ">=20.4"
 mypy = "^0.910"
 types-setuptools = "^57.4"
 
-wemake-python-styleguide = "^0.15"
+wemake-python-styleguide = "^0.16"
 flake8-pytest-style = "^1.5"
 nitpick = "^0.29"
 
