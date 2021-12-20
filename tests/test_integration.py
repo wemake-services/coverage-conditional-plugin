@@ -11,6 +11,7 @@ from test_project.example import (
     if_gte_python37,
     if_gte_python38,
     if_gte_python39,
+    if_gte_python310,
 )
 
 #: This is just our specific example.
@@ -28,6 +29,7 @@ def test_integration(cov, capsys):
     if_gte_python37()
     if_gte_python38()
     if_gte_python39()
+    if_gte_python310()
     always()
 
     cov.json_report(outfile='-')

@@ -1,6 +1,11 @@
 from typing import Tuple
 
 
+def if_gte_python310() -> Tuple[int, int]:  # pragma: py-gte-310
+    """Test function for pragma ``py-gte-310``."""
+    return (3, 10)
+
+
 def if_gte_python39() -> Tuple[int, int]:  # pragma: py-gte-39
     """Test function for pragma ``py-gte-39``."""
     return (3, 9)
