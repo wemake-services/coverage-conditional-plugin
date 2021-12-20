@@ -9,3 +9,4 @@ rules =
   "sys_version_info >= (3, 7)": py-gte-37
   "sys_version_info >= (3, 8)": py-gte-38
   "sys_version_info >= (3, 9)": py-gte-39
+  "sys.version_info >= (3, 10)": py-gte-310

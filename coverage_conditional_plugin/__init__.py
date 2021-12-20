@@ -21,6 +21,8 @@ def get_env_info() -> Dict[str, object]:
         'os_environ': os.environ,
         'is_installed': _is_installed,
         'package_version': _package_version,
+        # We need this, otherwise `_should_be_applied` can generate a warning:
+        'sys': sys,
     })
     return env_info
 
