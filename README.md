@@ -131,8 +131,3 @@ get_env_info()
 ## License
 
 [MIT](https://github.com/wemake.services/coverage-conditional-plugin/blob/master/LICENSE)
-
-
-## Credits
-
-This project was generated with [`wemake-python-package`](https://github.com/wemake-services/wemake-python-package). Current template version is: [a61725009d8399ae77376b5ad9de354214bc1159](https://github.com/wemake-services/wemake-python-package/tree/a61725009d8399ae77376b5ad9de354214bc1159). See what is [updated](https://github.com/wemake-services/wemake-python-package/compare/a61725009d8399ae77376b5ad9de354214bc1159...master) since then.
