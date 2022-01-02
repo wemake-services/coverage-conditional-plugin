@@ -3,6 +3,14 @@
 We follow [Semantic Versions](https://semver.org/).
 
 
+## Version 0.5.0
+
+### Features
+
+- `python3.10` support
+- `coverage@6` support
+
+
 ## Version 0.4.0
 
 ### Features
