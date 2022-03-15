@@ -36,7 +36,7 @@ packaging = ">=20.4"
 
 
 [tool.poetry.dev-dependencies]
-mypy = "^0.940"
+mypy = "^0.941"
 types-setuptools = "^57.4"
 
 wemake-python-styleguide = "^0.16"
