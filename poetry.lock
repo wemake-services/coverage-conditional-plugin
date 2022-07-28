@@ -70,9 +70,9 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 
 [package.extras]
-redis = ["redis (>=3.3.6,<4.0.0)"]
-memcached = ["python-memcached (>=1.59,<2.0)"]
 msgpack = ["msgpack-python (>=0.5,<0.6)"]
+memcached = ["python-memcached (>=1.59,<2.0)"]
+redis = ["redis (>=3.3.6,<4.0.0)"]
 
 [[package]]
 name = "certifi"
@@ -177,10 +177,10 @@ optional = false
 python-versions = "*"
 
 [package.extras]
-all = ["Sphinx (>=3)", "sphinx-rtd-theme (>=0.2)", "check-manifest (>=0.42)", "mock (>=1.3.0)", "pytest-cov (>=2.10.1)", "pytest-isort (>=1.2.0)", "sphinx (>=3)", "tox (>=3.7.0)", "numpy (>=1.13.0)", "numpy (>=1.15.0)", "numpy (>=1.18.0)", "pytest (==5.4.3)", "pytest-pycodestyle (>=2)", "pytest-pydocstyle (>=2)", "pytest (>=6)", "pytest-pycodestyle (>=2.2.0)", "pytest-pydocstyle (>=2.2.0)", "numpy (>=1.20.0)"]
-docs = ["Sphinx (>=3)", "sphinx-rtd-theme (>=0.2)"]
-numpy = ["numpy (>=1.13.0)", "numpy (>=1.15.0)", "numpy (>=1.18.0)", "numpy (>=1.20.0)"]
-tests = ["check-manifest (>=0.42)", "mock (>=1.3.0)", "pytest-cov (>=2.10.1)", "pytest-isort (>=1.2.0)", "sphinx (>=3)", "tox (>=3.7.0)", "pytest (==5.4.3)", "pytest-pycodestyle (>=2)", "pytest-pydocstyle (>=2)", "pytest (>=6)", "pytest-pycodestyle (>=2.2.0)", "pytest-pydocstyle (>=2.2.0)"]
+tests = ["pytest-pydocstyle (>=2.2.0)", "pytest-pycodestyle (>=2.2.0)", "pytest (>=6)", "pytest-pydocstyle (>=2)", "pytest-pycodestyle (>=2)", "pytest (==5.4.3)", "tox (>=3.7.0)", "sphinx (>=3)", "pytest-isort (>=1.2.0)", "pytest-cov (>=2.10.1)", "mock (>=1.3.0)", "check-manifest (>=0.42)"]
+numpy = ["numpy (>=1.20.0)", "numpy (>=1.18.0)", "numpy (>=1.15.0)", "numpy (>=1.13.0)"]
+docs = ["sphinx-rtd-theme (>=0.2)", "Sphinx (>=3)"]
+all = ["numpy (>=1.20.0)", "pytest-pydocstyle (>=2.2.0)", "pytest-pycodestyle (>=2.2.0)", "pytest (>=6)", "pytest-pydocstyle (>=2)", "pytest-pycodestyle (>=2)", "pytest (==5.4.3)", "numpy (>=1.18.0)", "numpy (>=1.15.0)", "numpy (>=1.13.0)", "tox (>=3.7.0)", "sphinx (>=3)", "pytest-isort (>=1.2.0)", "pytest-cov (>=2.10.1)", "mock (>=1.3.0)", "check-manifest (>=0.42)", "sphinx-rtd-theme (>=0.2)", "Sphinx (>=3)"]
 
 [[package]]
 name = "docutils"
@@ -540,7 +540,7 @@ colorama = {version = ">=0.3.4", markers = "sys_platform == \"win32\""}
 win32-setctime = {version = ">=1.0.0", markers = "sys_platform == \"win32\""}
 
 [package.extras]
-dev = ["codecov (>=2.0.15)", "colorama (>=0.3.4)", "flake8 (>=3.7.7)", "tox (>=3.9.0)", "tox-travis (>=0.12)", "pytest (>=4.6.2)", "pytest-cov (>=2.7.1)", "Sphinx (>=2.2.1)", "sphinx-autobuild (>=0.7.1)", "sphinx-rtd-theme (>=0.4.3)", "black (>=19.10b0)", "isort (>=5.1.1)"]
+dev = ["isort (>=5.1.1)", "black (>=19.10b0)", "sphinx-rtd-theme (>=0.4.3)", "sphinx-autobuild (>=0.7.1)", "Sphinx (>=2.2.1)", "pytest-cov (>=2.7.1)", "pytest (>=4.6.2)", "tox-travis (>=0.12)", "tox (>=3.9.0)", "flake8 (>=3.7.7)", "colorama (>=0.3.4)", "codecov (>=2.0.15)"]
 
 [[package]]
 name = "marshmallow"
@@ -690,8 +690,8 @@ python-versions = ">=3.6"
 importlib-metadata = {version = ">=0.12", markers = "python_version < \"3.8\""}
 
 [package.extras]
-dev = ["pre-commit", "tox"]
-testing = ["pytest", "pytest-benchmark"]
+testing = ["pytest-benchmark", "pytest"]
+dev = ["tox", "pre-commit"]
 
 [[package]]
 name = "py"
@@ -801,7 +801,7 @@ coverage = {version = ">=5.2.1", extras = ["toml"]}
 pytest = ">=4.6"
 
 [package.extras]
-testing = ["fields", "hunter", "process-tests", "six", "pytest-xdist", "virtualenv"]
+testing = ["virtualenv", "pytest-xdist", "six", "process-tests", "hunter", "fields"]
 
 [[package]]
 name = "pytest-pythonpath"
@@ -1014,7 +1014,7 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "types-setuptools"
-version = "63.2.1"
+version = "63.2.2"
 description = "Typing stubs for setuptools"
 category = "dev"
 optional = false
@@ -1080,7 +1080,7 @@ optional = false
 python-versions = ">=3.5"
 
 [package.extras]
-dev = ["pytest (>=4.6.2)", "black (>=19.3b0)"]
+dev = ["black (>=19.3b0)", "pytest (>=4.6.2)"]
 
 [[package]]
 name = "zipp"
@@ -1627,8 +1627,8 @@ typed-ast = [
     {file = "typed_ast-1.5.1.tar.gz", hash = "sha256:484137cab8ecf47e137260daa20bafbba5f4e3ec7fda1c1e69ab299b75fa81c5"},
 ]
 types-setuptools = [
-    {file = "types-setuptools-63.2.1.tar.gz", hash = "sha256:2957a40addfca5c7125fd8d386a9efda5379098c6e66a08e02257fd1cea42131"},
-    {file = "types_setuptools-63.2.1-py3-none-any.whl", hash = "sha256:eca7cbdd8db15e0ec37174a7dcfc9c8cbc87106f453066340e31729ec853cd63"},
+    {file = "types-setuptools-63.2.2.tar.gz", hash = "sha256:a9aa0c01d5f3443cd544026d5ffc97b95ddadf731dab13419c393d43fd8617c0"},
+    {file = "types_setuptools-63.2.2-py3-none-any.whl", hash = "sha256:a370df7a1e0dc856af9d998234f6e2ab04f30f25b8e1410f6db65910979f6252"},
 ]
 typing-extensions = [
     {file = "typing_extensions-4.0.1-py3-none-any.whl", hash = "sha256:7f001e5ac290a0c0401508864c7ec868be4e701886d5b573a9528ed3973d9d3b"},
