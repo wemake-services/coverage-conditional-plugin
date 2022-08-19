@@ -43,7 +43,7 @@ packaging = ">=20.4"
 
 [tool.poetry.dev-dependencies]
 mypy = "^0.971"
-types-setuptools = "^64.0"
+types-setuptools = "^65.1"
 
 wemake-python-styleguide = "^0.16"
 flake8-pytest-style = "^1.5"
