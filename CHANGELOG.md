@@ -3,6 +3,18 @@
 We follow [Semantic Versions](https://semver.org/).
 
 
+## Version 0.6.0
+
+### Features
+
+- Drop `python3.6` support
+- Adds `tests/` and `test_project/` to `sdist` distributions
+
+### Misc
+
+- Upgrades `poetry` to `1.2`
+
+
 ## Version 0.5.0
 
 ### Features
