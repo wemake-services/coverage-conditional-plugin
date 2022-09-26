@@ -2,16 +2,13 @@ import os
 import sys
 import traceback
 from importlib import import_module
-from typing import ClassVar, Dict, Iterable, Optional, Tuple, Union
+from typing import ClassVar, Dict, Iterable, Tuple, Union
 
-try:  # pragma: no cover
-    from importlib.metadata import version as metadata_version
-except ImportError:  # pragma: no cover
-    from importlib_metadata import version as metadata_version  # type: ignore
 from coverage import CoveragePlugin
 from coverage.config import CoverageConfig
-from packaging import version
 from packaging.markers import default_environment
+
+from coverage_conditional_plugin.version import package_version
 
 
 def get_env_info() -> Dict[str, object]:
@@ -23,7 +20,7 @@ def get_env_info() -> Dict[str, object]:
         'sys_version_info': sys.version_info,
         'os_environ': os.environ,
         'is_installed': _is_installed,
-        'package_version': _package_version,
+        'package_version': package_version,
         # We need this, otherwise `_should_be_applied` can generate a warning:
         'sys': sys,
     })
@@ -119,20 +116,6 @@ def _is_installed(package: str) -> bool:
     except ImportError:
         return False
     return True
-
-
-def _package_version(
-    package: str,
-) -> Optional[Tuple[int, ...]]:
-    """
-    Helper function that fetches distribution version.
-
-    Can throw multiple exceptions.
-    Be careful, use ``is_installed`` before using this one.
-
-    Returns parsed varsion to be easily worked with.
-    """
-    return version.parse(metadata_version(package)).release
 
 
 def coverage_init(reg, options) -> None:
