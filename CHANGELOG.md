@@ -3,6 +3,13 @@
 We follow [Semantic Versions](https://semver.org/).
 
 
+## Version 0.7.0
+
+### Features
+
+- Use `importlib` instead of `pkg_resources` to get package version
+
+
 ## Version 0.6.0
 
 ### Features

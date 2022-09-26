@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "coverage-conditional-plugin"
-version = "0.6.0"
+version = "0.7.0"
 description = "Conditional coverage based on any rules you define!"
 license = "MIT"
 
