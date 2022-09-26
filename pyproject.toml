@@ -37,6 +37,7 @@ python = "^3.7"
 
 coverage = ">=5,<7"
 packaging = ">=20.4"
+importlib_metadata = { version = "*", python = "<3.10" }
 
 [tool.poetry.group.test.dependencies]
 mypy = "^0.971"
@@ -48,10 +49,9 @@ nitpick = "^0.29"
 
 safety = "^2.1"
 
-pytest = "^6.2"
+pytest = "^7.0"
 pytest-cov = "^3.0"
 pytest-randomly = "^3.10"
-pytest-pythonpath = "^0.7"
 
 
 [build-system]
