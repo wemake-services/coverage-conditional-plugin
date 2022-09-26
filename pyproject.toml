@@ -48,10 +48,9 @@ nitpick = "^0.29"
 
 safety = "^2.1"
 
-pytest = "^6.2"
+pytest = "^7.0"
 pytest-cov = "^3.0"
 pytest-randomly = "^3.10"
-pytest-pythonpath = "^0.7"
 
 
 [build-system]
