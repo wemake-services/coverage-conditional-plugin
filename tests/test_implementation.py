@@ -1,4 +1,5 @@
-from coverage_conditional_plugin import _is_installed, _package_version
+from coverage_conditional_plugin import _is_installed
+from coverage_conditional_plugin.version import package_version
 
 
 def test_is_installed():
@@ -10,8 +11,8 @@ def test_is_installed():
 
 def test_package_version():
     """Ensures that ``_package_version`` is correct."""
-    coverage_version = _package_version('coverage')
-    pytest_version = _package_version('pytest')
+    coverage_version = package_version('coverage')
+    pytest_version = package_version('pytest')
 
     assert coverage_version is not None
     assert coverage_version < (1000, 0, 0)
