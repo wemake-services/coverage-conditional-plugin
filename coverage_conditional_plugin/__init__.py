@@ -4,7 +4,10 @@ import traceback
 from importlib import import_module
 from typing import ClassVar, Dict, Iterable, Optional, Tuple, Union
 
-import pkg_resources
+try:  # pragma: no cover
+    from importlib.metadata import version as metadata_version
+except ImportError:  # pragma: no cover
+    from importlib_metadata import version as metadata_version  # type: ignore
 from coverage import CoveragePlugin
 from coverage.config import CoverageConfig
 from packaging import version
@@ -129,9 +132,7 @@ def _package_version(
 
     Returns parsed varsion to be easily worked with.
     """
-    return version.parse(
-        pkg_resources.get_distribution(package).version,
-    ).release
+    return version.parse(metadata_version(package)).release
 
 
 def coverage_init(reg, options) -> None:
