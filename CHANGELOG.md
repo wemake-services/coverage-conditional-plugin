@@ -2,6 +2,12 @@
 
 We follow [Semantic Versions](https://semver.org/).
 
+## Version 0.8.0
+
+### Features
+
+- Bump `coverage` to `7.0`
+
 
 ## Version 0.7.0
 

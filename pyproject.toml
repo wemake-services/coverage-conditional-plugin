@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "coverage-conditional-plugin"
-version = "0.7.0"
+version = "0.8.0"
 description = "Conditional coverage based on any rules you define!"
 license = "MIT"
 
@@ -32,6 +32,9 @@ classifiers = [
   "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
+[tool.poetry.urls]
+"Funding" = "https://github.com/sponsors/wemake-services"
+
 [tool.poetry.dependencies]
 python = "^3.7"
 
@@ -40,16 +43,16 @@ packaging = ">=20.4"
 importlib_metadata = { version = "*", python = "<3.10" }
 
 [tool.poetry.group.test.dependencies]
-mypy = "^0.971"
+mypy = "^0.990"
 types-setuptools = "^65.3"
 
-wemake-python-styleguide = "^0.16"
+wemake-python-styleguide = "^0.17"
 flake8-pytest-style = "^1.5"
 nitpick = "^0.29"
 
 safety = "^2.1"
 
-pytest = "^7.0"
+pytest = "^7.2"
 pytest-cov = "^3.0"
 pytest-randomly = "^3.10"
 
