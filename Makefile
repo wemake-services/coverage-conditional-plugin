@@ -13,7 +13,7 @@ unit:
 package:
 	poetry check
 	poetry run pip check
-	poetry run safety check --full-report --ignore=51457
+	poetry run safety check --full-report
 
 .PHONY: test
 test: lint unit package
