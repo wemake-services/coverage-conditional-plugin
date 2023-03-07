@@ -43,7 +43,7 @@ packaging = ">=20.4"
 importlib_metadata = { version = "*", python = "<3.10" }
 
 [tool.poetry.group.test.dependencies]
-mypy = "^0.990"
+mypy = ">=0.990,<1.2"
 types-setuptools = "^65.3"
 
 wemake-python-styleguide = "^0.17"
