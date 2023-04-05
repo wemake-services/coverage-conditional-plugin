@@ -44,7 +44,7 @@ importlib_metadata = { version = "*", python = "<3.10" }
 
 [tool.poetry.group.test.dependencies]
 mypy = "^0.990"
-types-setuptools = "^65.3"
+types-setuptools = ">=65.3,<68.0"
 
 wemake-python-styleguide = "^0.17"
 flake8-pytest-style = "^1.5"
