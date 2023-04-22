@@ -50,10 +50,9 @@ class _ConditionalCovPlugin(CoveragePlugin):
                 config.get_option(self._omit_opt_name_plugin).splitlines(),
             )
         except AttributeError:  # toml format
-            omits_dict = config.get_option(self._omit_opt_name_plugin)
-            omits = omits_dict.items() if omits_dict else ()
+            omits = config.get_option(self._omit_opt_name_plugin) or {}
 
-        for omit in omits:
+        for omit in omits.items():
             self._process_omit(config, omit)
 
     def _configure_rules(self, config: CoverageConfig) -> None:
