@@ -2,7 +2,7 @@ import os
 import sys
 import traceback
 from importlib import import_module
-from typing import ClassVar, Dict, Iterable, Tuple, Union
+from typing import ClassVar, Dict, Tuple, Union
 
 from coverage import CoveragePlugin
 from coverage.config import CoverageConfig
@@ -30,6 +30,8 @@ def get_env_info() -> Dict[str, object]:
 class _ConditionalCovPlugin(CoveragePlugin):
     _rules_opt_name: ClassVar[str] = 'coverage_conditional_plugin:rules'
     _ignore_opt_name: ClassVar[str] = 'report:exclude_lines'
+    _omit_opt_name_plugin: ClassVar[str] = 'coverage_conditional_plugin:omit'
+    _omit_opt_name_coverage: ClassVar[str] = 'run:omit'
 
     def configure(self, config: CoverageConfig) -> None:
         """
@@ -38,8 +40,23 @@ class _ConditionalCovPlugin(CoveragePlugin):
         Part of the ``coverage`` public API.
         Called right after ``coverage_init`` function.
         """
-        rules: Iterable[str]
+        self._configure_omits(config)
+        self._configure_rules(config)
 
+    def _configure_omits(self, config: CoverageConfig) -> None:
+        try:  # ini format
+            omits = filter(
+                bool,
+                config.get_option(self._omit_opt_name_plugin).splitlines(),
+            )
+        except AttributeError:  # toml format
+            omits_dict = config.get_option(self._omit_opt_name_plugin)
+            omits = omits_dict.items() if omits_dict else ()
+
+        for omit in omits:
+            self._process_omit(config, omit)
+
+    def _configure_rules(self, config: CoverageConfig) -> None:
         try:  # ini format
             rules = filter(
                 bool,
@@ -50,6 +67,21 @@ class _ConditionalCovPlugin(CoveragePlugin):
 
         for rule in rules:
             self._process_rule(config, rule)
+
+    def _process_omit(
+        self, config: CoverageConfig, omit: Union[str, Tuple[str, str]],
+    ) -> None:
+        if isinstance(omit, str):
+            code, pattern = [part.strip() for part in omit.rsplit(':', 1)]
+            code = code[1:-1]  # removes quotes
+            pattern = pattern[1:-1]
+        elif isinstance(omit, tuple):
+            pattern = omit[0]
+            code = omit[1]
+        else:
+            raise ValueError("Invalid type for 'omit'.")
+        if self._should_be_applied(code):
+            self._omit_pattern(config, pattern)
 
     def _process_rule(
         self, config: CoverageConfig, rule: Union[str, Tuple[str, str]],
@@ -107,6 +139,12 @@ class _ConditionalCovPlugin(CoveragePlugin):
         exclude_lines = config.get_option(self._ignore_opt_name)
         exclude_lines.append(marker)
         config.set_option(self._ignore_opt_name, exclude_lines)
+
+    def _omit_pattern(self, config: CoverageConfig, pattern: str) -> None:
+        """Adds a file name pattern to the omit list."""
+        omit_patterns = config.get_option(self._omit_opt_name_coverage)
+        omit_patterns.append(pattern)
+        config.set_option(self._omit_opt_name_coverage, omit_patterns)
 
 
 def _is_installed(package: str) -> bool:

@@ -4,6 +4,8 @@ plugins =
   coverage_conditional_plugin
 
 [coverage_conditional_plugin]
+omit =
+  "sys_version_info >= (3, 6)": "test_project/omit*.py"
 rules =
   "sys_version_info >= (3, 6)": py-gte-36
   "sys_version_info >= (3, 7)": py-gte-37

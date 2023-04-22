@@ -1,6 +1,9 @@
 [tool.coverage.run]
 plugins = ["coverage_conditional_plugin"]
 
+[tool.coverage.coverage_conditional_plugin.omit]
+"test_project/omit*.py" = "sys_version_info >= (3, 6)"
+
 [tool.coverage.coverage_conditional_plugin.rules]
 py-gte-36 = "sys_version_info >= (3, 6)"
 py-gte-37 = "sys_version_info >= (3, 7)"
