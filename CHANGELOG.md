@@ -2,6 +2,18 @@
 
 We follow [Semantic Versions](https://semver.org/).
 
+
+## Version 0.9.0
+
+### Features
+
+- Adds `python@3.11` support
+- Now, only `coverage@7` is officially supported
+- We can now omit whole modules,
+  using `[tool.coverage.coverage_conditional_plugin.omit]` feature 
+  in TOML configuration files
+
+
 ## Version 0.8.0
 
 ### Features
