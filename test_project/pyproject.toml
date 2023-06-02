@@ -1,5 +1,16 @@
 [tool.coverage.run]
 plugins = ["coverage_conditional_plugin"]
+omit = ["test_project/missing.py"]
+
+[tool.coverage.report]
+exclude_also = ['raise NotImplementedError']
+
+[tool.coverage.coverage_conditional_plugin.omit]
+"os_environ.get('OMIT1')" = [
+  "test_project/omit*.py",
+  "test_project/compat.py",
+]
+"os_environ.get('OMIT2')" = "test_project/compat.py"
 
 [tool.coverage.coverage_conditional_plugin.rules]
 py-gte-36 = "sys_version_info >= (3, 6)"
@@ -7,3 +18,4 @@ py-gte-37 = "sys_version_info >= (3, 7)"
 py-gte-38 = "sys_version_info >= (3, 8)"
 py-gte-39 = "sys_version_info >= (3, 9)"
 py-gte-310 = "sys_version_info >= (3, 10)"
+py-gte-311 = "sys_version_info >= (3, 11)"

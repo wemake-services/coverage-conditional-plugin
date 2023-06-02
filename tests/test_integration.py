@@ -12,14 +12,24 @@ from test_project.example import (
     if_gte_python38,
     if_gte_python39,
     if_gte_python310,
+    if_gte_python311,
 )
 
 #: This is just our specific example.
 _EXCUDED_LINES = (sys.version_info[1] - 6) * 3 + 6
+# 3.11 = 21
+# 3.10 = 18
 # 3.9 = 15
 # 3.8 = 12
 # 3.7 = 9
 # 3.6 = 6
+
+#: This is just a result of the coverage run.
+#: It might change if you add new files / change something in `test_project/`.
+_COVERAGE_PERCENT = 63
+
+#: Lines that are not convered due to `omit` setting:
+_MISSING_LINES = 4  # 1 uncovered + 3 in omits
 
 
 def test_integration(cov, capsys):
@@ -30,6 +40,7 @@ def test_integration(cov, capsys):
     if_gte_python38()
     if_gte_python39()
     if_gte_python310()
+    if_gte_python311()
     always()
 
     cov.json_report(outfile='-')
@@ -39,8 +50,8 @@ def test_integration(cov, capsys):
     assert len(
         coverage['files']['test_project/example.py']['excluded_lines'],
     ) == _EXCUDED_LINES
-    assert int(coverage['totals']['percent_covered']) >= 80
-    assert coverage['totals']['missing_lines'] == 1
+    assert int(coverage['totals']['percent_covered']) >= _COVERAGE_PERCENT
+    assert coverage['totals']['missing_lines'] == _MISSING_LINES
 
 
 @pytest.mark.parametrize('configfile', ['.coveragerc', 'pyproject.toml'])
@@ -59,3 +70,5 @@ def test_config_file_parsing(configfile):
         'py-gte-3{minor_ver}'.format(minor_ver=sys.version_info[1])
         in cov.config.exclude_list
     )
+    # Default exclude must not be lost:
+    assert 'raise NotImplementedError' in cov.config.exclude_list

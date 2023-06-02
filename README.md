@@ -38,6 +38,11 @@ plugins =
   coverage_conditional_plugin
 
 [coverage:coverage_conditional_plugin]
+# Here we specify files to conditionally omit:
+omit =
+  "sys_platform == 'win32'":
+      "my_project/omit*.py"
+      "my_project/win.py"
 # Here we specify our pragma rules:
 rules =
   "sys_version_info >= (3, 8)": py-gte-38
@@ -46,10 +51,15 @@ rules =
 ```
 
 Or to your `pyproject.toml`:
+
 ```toml
 [tool.coverage.run]
 # Here we specify plugins for coverage to be used:
 plugins = ["coverage_conditional_plugin"]
+
+[tool.coverage.coverage_conditional_plugin.omit]
+# Here we specify files to conditionally omit:
+"my_project/omit*.py" = "sys_platform == 'win32'"
 
 [tool.coverage.coverage_conditional_plugin.rules]
 # Here we specify our pragma rules:
@@ -126,6 +136,27 @@ from coverage_conditional_plugin import get_env_info
 
 get_env_info()
 ```
+
+
+## Writing omits
+
+Omits allow entire files to be conditionally omitted from coverage measurement.
+
+The TOML format for omits is:
+
+```toml
+[tool.coverage.coverage_conditional_plugin.omit]
+"pragma-condition" = ["project/prefix*.py", "project/filename.py"]
+# or
+"pragma-condition" = "project/filename.py"
+```
+
+**Note**: `ini` format is not supported for `omit` configuration option,
+because there's no easy way to parse `ini` complex configuration. 
+PRs with the fix are welcome!
+
+File name patterns should follow coverage.py's `[run] omit` syntax.
+See [coverage.py](https://coverage.readthedocs.io/en/stable/source.html).
 
 
 ## License

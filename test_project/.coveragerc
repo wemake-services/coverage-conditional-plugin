@@ -3,10 +3,22 @@ branch = true
 plugins =
   coverage_conditional_plugin
 
+[report]
+exclude_also =
+  raise NotImplementedError
+
 [coverage_conditional_plugin]
+# TODO: not supported, you can write parser similar to
+# https://github.com/PyCQA/flake8/blob/c8d75d9966c074770695cd44e2c2e9d8488761e7/src/flake8/utils.py#L61
+# But, I don't have time for it now.
+# omit =
+#   "os_environ.get('OMIT_FILES')":
+#    "test_project/omit*.py",
+#    "test_project/compat.py"
 rules =
   "sys_version_info >= (3, 6)": py-gte-36
   "sys_version_info >= (3, 7)": py-gte-37
   "sys_version_info >= (3, 8)": py-gte-38
   "sys_version_info >= (3, 9)": py-gte-39
   "sys.version_info >= (3, 10)": py-gte-310
+  "sys.version_info >= (3, 11)": py-gte-311

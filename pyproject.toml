@@ -38,7 +38,7 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.7"
 
-coverage = ">=5,<8"
+coverage = ">=7,<8"
 packaging = ">=20.4"
 importlib_metadata = { version = "*", python = "<3.10" }
 
