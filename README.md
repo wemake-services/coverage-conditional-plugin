@@ -59,7 +59,7 @@ plugins = ["coverage_conditional_plugin"]
 
 [tool.coverage.coverage_conditional_plugin.omit]
 # Here we specify files to conditionally omit:
-"my_project/omit*.py" = "sys_platform == 'win32'"
+"sys_platform == 'win32'" = "my_project/omit*.py"
 
 [tool.coverage.coverage_conditional_plugin.rules]
 # Here we specify our pragma rules:
