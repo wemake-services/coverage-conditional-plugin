@@ -76,13 +76,13 @@ Adapt rules to suit your needs!
 Imagine that we have this code:
 
 ```python
-try:  # pragma: has-django
+try:  # pragma: has-no-django
     import django
-except ImportError:  # pragma: has-no-django
+except ImportError:  # pragma: has-django
     django = None
 
 def run_if_django_is_installed():
-    if django is not None:  # pragma: has-django
+    if django is not None:  # pragma: has-no-django
         ...
 ```
 
@@ -95,6 +95,9 @@ rules =
   "not is_installed('django')": has-no-django
 
 ```
+
+Important to consider here is that the condition evaluating to `True`
+means that the coverage will be ignored.
 
 When running tests with and without `django` installed
 you will have `100%` coverage in both cases.
